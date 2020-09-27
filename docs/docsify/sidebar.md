@@ -9,7 +9,7 @@
 - **数据结构与算法**
 - [算法入门](算法入门.md)
 - [剑指offer](剑指offer.md)
-- [Leetcode](Leetcode.md)
+- [Leetcode](鲲小白刷leetcode.md)
 
 - **数据库**
 - [MySQL](MySQL.md)
