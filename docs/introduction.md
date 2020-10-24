@@ -50,7 +50,7 @@
 
 　　数据结构 & 源码分析：ArrayList、Vector、LinkedList、HashMap、ConcurrentHashMap、HashSet、LinkedHashSet and LinkedHashMap
 
-- [Java 并发编程](JavaArchitecture/03-Java并发编程.md)
+- [Java 并发编程](多线程.md)
 
 　　线程状态、线程机制、线程通信、J.U.C 组件、JMM、线程安全、锁优化
 
@@ -58,7 +58,7 @@
 
 　　磁盘操作、字节操作、字符操作、对象操作、网络操作、NIO
 
-- [Java 虚拟机](JavaArchitecture/05-Java虚拟机.md)
+- [Java 虚拟机](JVM.md)
 
 　　运行时数据区域、垃圾收集、内存分配机制、类加载机制、性能调优监控工具
 
@@ -157,13 +157,13 @@
 
 - Python 语言基础
 - Scrapy 爬虫框架
-- Django
+- [Django](Django.md)
 
 
 
 
 
-## 八、机器学习
+## 八、机器学习（以后学习加入）
 - 经典机器学习算法
 
   K 近邻算法、线性回归、梯度下降法、逻辑回归、支持向量机、决策树、集成学习

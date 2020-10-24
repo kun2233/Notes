@@ -1,23 +1,12 @@
-Java源码（.java）经过编译（javac）后生成字节码文件（.class）。
+# JVM
 
-.Class文件又被JVM中的解释器编译成机器码在不同的操作系统（Windows、Linux、Mac）上运行。
+## 1、基础概念
 
-每种操作系统的解释器都是不同的，但基于解释器实现的虚拟机是相同的，这也是Java能够跨平台的原因。
+JVM（Java Virtual Machine），Java虚拟机，用于运行J**Java字节码**。
 
-在一个Java进程开始运行后，虚拟机就开始实例化。
+Java源码（.java）经过**编译**（javac）后生成**字节码文件（.class）**。
 
-JVM（Java Virtual Machine）是用于运行J**ava字节码**的**虚拟机**。包括：
-
-- 一套字节码指令集
-- 一组程序寄存器
-- 一个虚拟机栈
-- 一个虚拟机堆
-- 一个方法区
-- 一个垃圾回收器
-
-JVM运行在操作系统之上，不与硬件设备直接交互。
-
-Java程序的具体运行过程如下。
+.class文件又被JVM中的**解释器**编译成机器码在不同的操作系统（Windows、Linux、Mac）上运行。
 
 （1）**Java源文件**被编译器**编译**成**字节码文件**。
 
@@ -25,17 +14,71 @@ Java程序的具体运行过程如下。
 
 （3）机器码调用相应操作系统的**本地方法库**执行相应的方法。
 
-![img](C:\Users\hk199\Desktop\Notes\assets\JVM1.png)
+每种操作系统的解释器都是不同的，但基于解释器实现的虚拟机是相同的，这也是Java能够跨平台的原因。
+
+JVM本质是软件，运行在操作系统上，不与硬件直接交互。
+
+在一个Java进程开始运行后，虚拟机就开始实例化，多个程序启动就会存在多个虚拟机实例  。
+
+
+
+**Hotspot JVM** 中的 Java 线程与原生操作系统线程有直接的映射关系。
+
+当线程本地存储、缓冲区分配、同步对象、栈、程序计数器等准备好以后，就会创建一个操作系统原生线程。
+
+Java 线程结束，原生线程随之被回收。
+
+操作系统负责调度所有线程，并把它们分配到任何可用的 CPU 上。当原生线程初始化完毕，就会调用 Java 线程的 run() 方法。当线程结束时，会释放原生线程和 Java 线程的所有资源  。
+
+
+
+
+
+## 2、JVM体系结构
 
 Java虚拟机包括一个**类加载器子系统**（Class Loader SubSystem）、**运行时数据区**（Runtime Data Area）、**执行引擎**和**本地接口库**（Native InterfaceLibrary）。
 
-本地接口库通过调用本地方法库（Native Method Library）与操作系统交互，
+
+
+![](https://img-blog.csdnimg.cn/2020101809191097.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDU5MzQz,size_16,color_FFFFFF,t_70#pic_center)
+
+
+
+![](https://img-blog.csdnimg.cn/20201018092334555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDU5MzQz,size_16,color_FFFFFF,t_70#pic_center)
+
+
+
+
+
+本地接口库通过调用本地方法库（Native Method Library）与操作系统交互。
 
 ◎ **类加载器子系统（Class Loader）**
 
 用于将编译好的**．Class**文件**加载到JVM中**。
 
 类加载子系统是根据一个**类的全限定名**来加载该类的**二进制流**到**内存**中，在JVM 中将形成一份描述 Class 结构的**元信息对象**（方法区），通过该元信息对象可以获知 **Class 的结构信息**：如构造函数，属性和方法等，Java 允许用户借由这个 Class 相关的元信息对象间接调用 Class 对象的功能。
+
+![](https://img-blog.csdnimg.cn/20201018092813395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDU5MzQz,size_16,color_FFFFFF,t_70#pic_center)
+
+
+
+
+
+![](![双亲委派](https://img-blog.csdnimg.cn/20201018092813395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDU5MzQz,size_16,color_FFFFFF,t_70#pic_center))
+
+
+
+![](https://img-blog.csdnimg.cn/20201018092723707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDU5MzQz,size_16,color_FFFFFF,t_70#pic_center)
+
+
+
+
+
+
+
+
+
+
 
 ◎ **执行引擎**
 
@@ -45,7 +88,7 @@ Java虚拟机包括一个**类加载器子系统**（Class Loader SubSystem）�
 
 用于调用操作系统的本地方法库完成具体的指令操作。
 
-![img](C:\Users\hk199\Desktop\Notes\assets\JVM2.png)
+!(C:\Users\hk199\Desktop\Notes\assets\JVM2.png)
 
 ◎ **运行时数据区**
 
